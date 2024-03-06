@@ -3,7 +3,7 @@ import "./theme-config.css";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Theme, ThemePanel } from "@radix-ui/themes";
+import { Theme } from "@radix-ui/themes";
 import NavBar from "./NavBar";
 
 const inter = Inter({
@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.variable}>
-        <Theme appearance="light" accentColor="violet">
+        <Theme accentColor="violet">
           <NavBar />
           <main className="p-5">{children}</main>
         </Theme>
