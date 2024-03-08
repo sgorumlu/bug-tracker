@@ -1,11 +1,13 @@
+import { Container, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import "./theme-config.css";
-import "./globals.css";
+import { QueryClientProvider } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Container, Theme } from "@radix-ui/themes";
 import NavBar from "./NavBar";
 import AuthProvider from "./auth/Provider";
+import "./globals.css";
+import "./theme-config.css";
+import ClientProviderQuery from "./ClientProviderQuery";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,14 +23,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.variable}>
-        <AuthProvider>
-          <Theme accentColor="violet">
-            <NavBar />
-            <main className="p-5">
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </AuthProvider>
+        <ClientProviderQuery>
+          <AuthProvider>
+            <Theme accentColor="violet">
+              <NavBar />
+              <main className="p-5">
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </AuthProvider>
+        </ClientProviderQuery>
       </body>
     </html>
   );
